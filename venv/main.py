@@ -1,4 +1,5 @@
 from include.site_checker import SiteChecker
+from include.zbx_controller import ZabbixController
 
 
 # http status code - ex.: 200, 404
@@ -16,11 +17,27 @@ site = "cit-sk.ru"
 # warn, debug, none
 log_level = "debug"
 
+# zabbix url
+zbx_url = "http://192.168.0.111/zabbix"
+
+#zabbix_user
+zbx_user = "Admin"
+
+#zabbix password
+zbx_pass = "zabbix"
+
+#zabbix host for web monitor
+zbx_wmhost = "Web Monitor"
+#zbx_wmhost = "Zabbix server"
+zbx_wmgroup = "Hosti"
 
 
 def main():
-    check = SiteChecker(site, site_keyword, site_protocol, allowable_http_status)
-    check.doCheck()
+#    check = SiteChecker(site, site_keyword, site_protocol, allowable_http_status)
+#    check.doCheck()
+    zbxUpdater = ZabbixController(zbx_url, zbx_user, zbx_pass, zbx_wmhost, zbx_wmgroup)
+    zbxUpdater.checkWmHost()
+
 
 
 if __name__== "__main__":

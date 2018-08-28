@@ -29,7 +29,7 @@ zbx_pass = "zabbix"
 #zabbix host for web monitor
 zbx_wmhost = "Web Monitor"
 #zbx_wmhost = "Zabbix server"
-zbx_wmgroup = "Hosti"
+zbx_wmgroup = "Hosting"
 
 
 def main():

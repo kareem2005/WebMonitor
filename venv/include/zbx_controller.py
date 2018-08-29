@@ -1,5 +1,4 @@
 from pyzabbix import ZabbixAPI
-import json
 from include.logger import sendToLogger
 
 class ZabbixController():
@@ -20,7 +19,7 @@ class ZabbixController():
             sendToLogger('debug', 'Connected to zabbix-server API Version ' + zapi.api_version())
             return zapi
         except:
-            sendToLogger('error', 'Connection to zabbix-server on ' + str(self.zbx_url) + 'failed.')
+            sendToLogger('error', 'Connection to zabbix-server on ' + str(self.zbx_url) + ' failed.')
             exit(2)
 
     def checkWmHost(self):

@@ -29,15 +29,18 @@ zbx_wmgroup = "Hosting"
 # __________ NGINX ____________
 # path to nginx configuration file
 nginx_confpath = "F:\\Projects\\Files for Projects\\nginx.conf"
+domain_list = "cit-sk.ru\n" \
+              "velomap.ru\n" \
+              "ya.ru"
 
 
 def main():
 #    check = SiteChecker(site, site_keyword, site_protocol, allowable_http_status)
 #    check.doCheck()
-#    zbxUpdater = ZabbixController(zbx_url, zbx_user, zbx_pass, zbx_wmhost, zbx_wmgroup)
-#    zbxUpdater.checkWmHost()
-    ngxDomains = NginxDomainFinder(nginx_confpath)
-    ngxDomains.getDomains()
+    zbxUpdater = ZabbixController(zbx_url, zbx_user, zbx_pass, zbx_wmhost, zbx_wmgroup)
+    zbxUpdater.addToMonitor(domain_list)
+#    ngxDomains = NginxDomainFinder(nginx_confpath)
+#    ngxDomains.getDomains()
 
 
 if __name__== "__main__":

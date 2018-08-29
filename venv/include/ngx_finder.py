@@ -1,5 +1,4 @@
 from include.logger import sendToLogger
-from nginxparser import load
 
 
 class NginxDomainFinder():
@@ -13,9 +12,6 @@ class NginxDomainFinder():
 
     def __readConfFile(self):
         return open(self.nginx_confpath)
-
-    def __parseNginx(self):
-        load(self.__readConfFile())
 
     def __parseDomains(self, conf):
         result = ""

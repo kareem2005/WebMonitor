@@ -24,9 +24,20 @@ class ZabbixController():
     def __checkDomainMonitor(self, domain_list):
         domain_list = domain_list.split()
         for domain in domain_list:
-            self.__createDomainMonitor(domain)
+            print(self.__isDomainMonitorCreated(domain))
+            print(domain)
+     #       self.__createDomainMonitor(domain)
 
-    def __createDomainMonitor(self, domain):
+    def __isDomainMonitorCreated(self, domain):
+        print(domain)
+        return self.zapi.httptest.get(
+            {
+                "name": domain,
+                "hostids": self.wmhost_id
+            }
+        )
+
+    def __createDomainMonitor(self, domain, protocol, status_code, phrase):
         self.zapi.httptest.create(
             {
                 "name": domain,
@@ -34,9 +45,10 @@ class ZabbixController():
                 "steps": [
                     {
                         "name": domain,
-                        "url": "http://" + domain,
-                        "status_codes": "200",
-                        "no": 1
+                        "url": protocol + "://" + domain,
+                        "status_codes": status_code,
+                        "no": 1,
+                        "required": phrase
                     }
                 ]
             }

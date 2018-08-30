@@ -3,10 +3,10 @@ from include.zbx_controller import ZabbixController
 from include.ngx_finder import NginxDomainFinder
 
 
-# http status code - ex.: 200, 404
+# http status code - ex.: 200
 allowable_http_status = 200
 # special word for identifying site
-site_keyword = "cit"
+site_keyword = "центр"
 # http or https
 site_protocol = "http"
 # domain - ex.: example.com
@@ -36,7 +36,10 @@ domain_list = "cit-sk.ru\n" \
 
 def main():
     check = SiteChecker(site, site_keyword, site_protocol, allowable_http_status)
-    check.doCheck()
+    if (check.doCheck()):
+        print("OK")
+    else:
+        print("FAIL")
 #   zbxUpdater = ZabbixController(zbx_url, zbx_user, zbx_pass, zbx_wmhost, zbx_wmgroup)
 #    zbxUpdater.addToMonitor(domain_list)
 #    ngxDomains = NginxDomainFinder(nginx_confpath)

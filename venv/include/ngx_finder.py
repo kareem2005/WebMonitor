@@ -25,7 +25,6 @@ class NginxDomainFinder():
                 protocol = self.__nginxGetListenProtocol(conf_part)
                 domains_list.append(domain + ' ' + protocol)
         return domains_list
-        #return self.__nginxGetDomain(conf)
 
     def __nginxGetDomain(self, server_conf):
         server_conf = server_conf.splitlines()

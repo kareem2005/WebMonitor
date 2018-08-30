@@ -1,6 +1,6 @@
 import urllib3
 import re
-from include.logger import *
+from include.logger import sendToLogger
 
 
 class SiteChecker():
@@ -13,15 +13,17 @@ class SiteChecker():
 
     def doCheck(self):
         request = self.__getSite(self.site, self.site_protocol)
-
         if (self.__checkSiteStatus(request.status, self.allowable_http_status)):
             sendToLogger('debug', 'Checking site data ' + str(self.site))
             if (self.__checkSiteData(request.data, self.site_keyword)):
                 sendToLogger('ok', 'Site data checking ' + str(self.site) + ' OK')
+                return True
             else:
                 sendToLogger('warn', 'Site data checking ' + str(self.site) + ' FAIL')
+                return False
         else:
             sendToLogger('warn', 'Site status checking ' + str(self.site) + ' FAIL')
+            return False
 
     def __getSite(self, domain, protocol):
         url = protocol + '://' + domain
@@ -44,7 +46,7 @@ class SiteChecker():
             return False
 
     def __checkSiteData(self, request_data, keyword):
-        if re.search(str(keyword), str(request_data)):
+        if re.search(str(keyword), str(request_data.decode('utf-8'))):
             return True
         else:
             sendToLogger('warn', 'Keyword ' + str(keyword) + ' not found.')

@@ -67,7 +67,6 @@ class ZabbixController():
             exit(2)
 
     def __checkWmHost(self):
-        host_status = 0
         host = self.zapi.host.get(output=["status"], filter={"host": self.zbx_wmhostname}, limit=1)
         try:
             host_status = host[0]['status']

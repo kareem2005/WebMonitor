@@ -35,12 +35,12 @@ domain_list = "cit-sk.ru\n" \
 
 
 def main():
-#    check = SiteChecker(site, site_keyword, site_protocol, allowable_http_status)
-#    check.doCheck()
-    zbxUpdater = ZabbixController(zbx_url, zbx_user, zbx_pass, zbx_wmhost, zbx_wmgroup)
-    zbxUpdater.addToMonitor(domain_list)
+    check = SiteChecker(site, site_keyword, site_protocol, allowable_http_status)
+    check.doCheck()
+#   zbxUpdater = ZabbixController(zbx_url, zbx_user, zbx_pass, zbx_wmhost, zbx_wmgroup)
+#    zbxUpdater.addToMonitor(domain_list)
 #    ngxDomains = NginxDomainFinder(nginx_confpath)
-#    ngxDomains.getDomains()
+#   print(ngxDomains.getDomainsList())
 
 
 if __name__== "__main__":

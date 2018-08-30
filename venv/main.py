@@ -1,4 +1,5 @@
 from include.site_checker import SiteChecker
+from include.site_analyzer import SiteAnalyzer
 from include.zbx_controller import ZabbixController
 from include.ngx_finder import NginxDomainFinder
 
@@ -35,11 +36,14 @@ domain_list = "cit-sk.ru\n" \
 
 
 def main():
-    check = SiteChecker(site, site_keyword, site_protocol, allowable_http_status)
-    if (check.doCheck()):
-        print("OK")
-    else:
-        print("FAIL")
+    siteinfo = SiteAnalyzer(site, site_protocol)
+    print(siteinfo.get_http_status())
+    siteinfo.get_key_phrase()
+#    check = SiteChecker(site, site_keyword, site_protocol, allowable_http_status)
+#    if (check.doCheck()):
+#        print("OK")
+ #   else:
+ #       print("FAIL")
 #   zbxUpdater = ZabbixController(zbx_url, zbx_user, zbx_pass, zbx_wmhost, zbx_wmgroup)
 #    zbxUpdater.addToMonitor(domain_list)
 #    ngxDomains = NginxDomainFinder(nginx_confpath)

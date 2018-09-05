@@ -27,14 +27,16 @@ class SiteAnalyzer():
     def __analyze_site(self):
         data = self.request.data.decode('utf-8')
         #print(data)
-        print(self.__clear_html(data))
+        text = self.__get_clean_html_footer(data)
+        print(self.__select_keyword(text))
 
-    def __clear_htmlbs(self, html_text):
-        return BeautifulSoup(html_text, "lxml").text
+    def __select_keyword(self, text):
+        for line in text.decode('utf-8'):
+            print(line)
+        return True
 
-    def __clear_html(self, html_text):
-        clean_text = re.sub(re.compile('<.*?>'), '', html_text)
-        return clean_text
+    def __get_clean_html_footer(self, html_text):
+        return BeautifulSoup(html_text, "lxml").footer.text
 
     def __get_site(self, domain, protocol):
         url = protocol + '://' + domain
